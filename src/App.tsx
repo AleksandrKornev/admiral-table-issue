@@ -1,12 +1,15 @@
 import { useEffect, useMemo, useState } from 'react'
 import { v4 as uuid } from 'uuid';
-import { Table } from '@admiral-ds/react-ui';
+import { Column, Table } from '@admiral-ds/react-ui';
+import MaterialTable from '@mui/material/Table'
+import * as Material from '@mui/material';
 import { faker } from '@faker-js/faker';
 
 import './App.css'
 
 interface IItem {
   id: string;
+  key: string;
   name: string;
   username: string;
   avatar: string;
@@ -17,6 +20,12 @@ interface IItem {
   text2: string;
   text3: string;
   text4: string;
+  text5: string;
+  text6: string;
+  text7: string;
+  text8: string;
+  text9: string;
+  text10: string;
 }
 
 function getRandomInt(min: number, max: number) {
@@ -25,15 +34,17 @@ function getRandomInt(min: number, max: number) {
   return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
 }
 
-const COUNT_ITEMS = 201;
+const COUNT_ITEMS = 1005;
 
-const LIMIT = 200;
+const LIMIT = 1000;
 
 const itemsMock = [] as IItem[];
 for (let i = 0; i < COUNT_ITEMS; i++) {
+  const id = uuid()
   itemsMock.push({
-    id: uuid(),
-    name: `name-${uuid()}`,
+    id,
+    key: id,
+    name: `name-${id}`,
     username: faker.internet.username(),
     avatar: faker.image.url(),
     email: faker.internet.email(),
@@ -43,10 +54,16 @@ for (let i = 0; i < COUNT_ITEMS; i++) {
     text2: faker.lorem.lines(),
     text3: faker.lorem.lines(),
     text4: faker.lorem.lines(),
+    text5: faker.lorem.lines(),
+    text6: faker.lorem.lines(),
+    text7: faker.lorem.lines(),
+    text8: faker.lorem.lines(),
+    text9: faker.lorem.lines(),
+    text10: faker.lorem.lines(),
   });
 }
 
-const columns = [
+const columns: Column[] = [
   {
     name: 'id',
     title: 'id',
@@ -107,6 +124,42 @@ const columns = [
     width: '150px',
     sortable: true,
   },
+  {
+    name: 'text5',
+    title: 'text5',
+    width: '150px',
+    sortable: true,
+  },
+  {
+    name: 'text6',
+    title: 'text6',
+    width: '150px',
+    sortable: true,
+  },
+  {
+    name: 'text7',
+    title: 'text7',
+    width: '150px',
+    sortable: true,
+  },
+  {
+    name: 'text8',
+    title: 'text8',
+    width: '150px',
+    sortable: true,
+  },
+  {
+    name: 'text9',
+    title: 'text9',
+    width: '150px',
+    sortable: true,
+  },
+  {
+    name: 'text10',
+    title: 'text10',
+    width: '150px',
+    sortable: true,
+  },
 ];
 
 function App() {
@@ -164,7 +217,7 @@ function App() {
 
     const timer = setInterval(() => {
       generateNewItems();
-    }, 1000);
+    }, 200);
 
     return () => {
       clearInterval(timer);
@@ -187,6 +240,31 @@ function App() {
         displayRowSelectionColumn
       />
       )}
+      {/* {!isHide && (
+        <Material.TableContainer
+          component={Material.Paper}
+          sx={{ maxHeight: 500 }}
+        >
+          <Material.Table stickyHeader>
+            <Material.TableHead>
+              <Material.TableRow>
+                {columns.map((column, index) => (
+                  <Material.TableCell key={index}>{column.title}</Material.TableCell>
+                ))}
+              </Material.TableRow>
+            </Material.TableHead>
+            <Material.TableBody>
+              {itemsFormatted.map((it, index) => (
+                <Material.TableRow key={index}>
+                  {Object.keys(it).map((key, index) => (
+                    <Material.TableCell key={`${key}-${index}`}>{it.key}</Material.TableCell>
+                  ))}
+                </Material.TableRow>
+              ))}
+            </Material.TableBody>
+          </Material.Table>
+        </Material.TableContainer>
+      )} */}
     </div>
   );
 }
